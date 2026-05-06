@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { StatCard } from '@/components/stat-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { formatRM } from '@/lib/utils/format-currency';
+import { relativeDays } from '@/lib/utils/relative-time';
 
 async function getDashboardData() {
   const cookieStore = await cookies();
@@ -19,7 +20,7 @@ async function getDashboardData() {
     fetch(`${API}/users/me`, { headers, cache: 'no-store' }),
   ]);
 
-  if (progressRes.status === 404) return { noQuitPlan: true };
+  if (progressRes.status === 404) return { noQuitPlan: true } as const;
 
   const [progress, stats, user] = await Promise.all([
     progressRes.json().then((r: { data: unknown }) => r.data),
@@ -27,13 +28,18 @@ async function getDashboardData() {
     userRes.json().then((r: { data: unknown }) => r.data),
   ]);
 
-  return { progress, stats, user, noQuitPlan: false };
+  return { progress, stats, user, noQuitPlan: false } as const;
 }
 
 export default async function DashboardPage() {
   const data = await getDashboardData() as {
-    progress?: { daysSmokeFreee: number; moneySaved: number };
-    stats?: { totalPoints: number; cravingsManaged: number };
+    progress?: {
+      currentStreak: number;
+      totalSmokeFreeDays: number;
+      lastSlipAt: string | null;
+      moneySavedActual: number | null;
+    };
+    stats?: { totalPoints: number };
     user?: { name: string };
     noQuitPlan: boolean;
   };
@@ -56,11 +62,33 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <StatCard label="Days Smoke-Free" value={String(progress?.daysSmokeFreee ?? 0)} subtitle="days" />
-        <StatCard label="Money Saved" value={formatRM(progress?.moneySaved ?? 0)} subtitle="total saved" />
-        <StatCard label="Total Points" value={String(stats?.totalPoints ?? 0)} subtitle="keep earning!" />
-        <StatCard label="Cravings Managed" value={String(stats?.cravingsManaged ?? 0)} subtitle="you resisted!" />
+        <StatCard
+          label="Current Streak"
+          value={String(progress?.currentStreak ?? 0)}
+          subtitle="days"
+        />
+        <StatCard
+          label="Total Smoke-Free Days"
+          value={String(progress?.totalSmokeFreeDays ?? 0)}
+          subtitle="days"
+        />
+        <StatCard
+          label="Money Saved"
+          value={progress?.moneySavedActual !== null && progress?.moneySavedActual !== undefined
+            ? formatRM(progress.moneySavedActual)
+            : '—'}
+          subtitle="actual"
+        />
+        <StatCard
+          label="Total Points"
+          value={String(stats?.totalPoints ?? 0)}
+          subtitle="keep earning!"
+        />
       </div>
+
+      <p className="text-xs text-gray-500 -mt-2">
+        {relativeDays(progress?.lastSlipAt ?? null)}
+      </p>
 
       <div>
         <h2 className="font-semibold text-gray-700 mb-3">Quick Actions</h2>
