@@ -38,11 +38,13 @@ export interface QuitPlan {
 }
 
 export interface Progress {
-  daysSmokeFreee: number;
-  moneySaved: number;
+  currentStreak: number;
+  totalSmokeFreeDays: number;
+  lastSlipAt: string | null;
+  moneySavedActual: number | null;
   quitDate: string;
-  cigarettesPd: number;
-  dailyCost: number;
+  cigarettesPd: number | null;
+  dailyCost: number | null;
 }
 
 export interface Badge {
@@ -98,4 +100,33 @@ export interface ApiError {
   statusCode: number;
   error: string;
   message: string | string[];
+}
+
+export interface SmokeLogCreateResponse {
+  id: string;
+  loggedAt: string;
+  loggedDate: string;
+  count: number;
+  currentStreak: number;
+  totalSmokeFreeDays: number;
+  totalPoints: number;
+}
+
+export interface SmokeLogHistoryItem {
+  id: string;
+  loggedAt: string;
+  count: number;
+}
+
+export interface SmokeLogHistory {
+  items: SmokeLogHistoryItem[];
+}
+
+export interface SmokeHeatmapDay {
+  date: string;
+  count: number;
+}
+
+export interface SmokeHeatmap {
+  days: SmokeHeatmapDay[];
 }
