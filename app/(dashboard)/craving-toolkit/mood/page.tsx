@@ -39,10 +39,10 @@ export default function MoodPage() {
     <div className="space-y-5">
       <div className="flex items-center gap-3">
         <Button variant="ghost" onClick={() => router.back()}>←</Button>
-        <h1 className="text-xl font-bold text-gray-800">Mood Log</h1>
+        <h1 className="text-xl font-bold text-foreground">Mood Log</h1>
       </div>
 
-      <Card>
+      <Card className="[background:var(--gradient-neutral)]">
         <CardContent className="space-y-6 pt-5">
           <div>
             <Label className="text-base font-semibold">How do you feel? {mood}/5 — {MOOD_LABELS[mood]}</Label>
@@ -52,7 +52,7 @@ export default function MoodPage() {
               onValueChange={(v) => setMood(Array.isArray(v) ? v[0] : v)}
               className="mt-3"
             />
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
               <span>😞 Very Low</span>
               <span>😊 Great</span>
             </div>
@@ -66,7 +66,7 @@ export default function MoodPage() {
               onValueChange={(v) => setCraving(Array.isArray(v) ? v[0] : v)}
               className="mt-3"
             />
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
               <span>🟢 None</span>
               <span>🔴 Very Strong</span>
             </div>
@@ -83,7 +83,7 @@ export default function MoodPage() {
             />
           </div>
 
-          <Button onClick={handleSubmit} disabled={saving} className="w-full bg-green-600 hover:bg-green-700">
+          <Button onClick={handleSubmit} disabled={saving} className="w-full">
             {saving ? 'Saving...' : 'Save Mood Log (+2 pts)'}
           </Button>
         </CardContent>

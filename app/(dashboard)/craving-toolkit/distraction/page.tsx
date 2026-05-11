@@ -43,9 +43,9 @@ export default function DistractionPage() {
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Button variant="ghost" onClick={() => router.back()}>←</Button>
-        <h1 className="text-xl font-bold text-gray-800">Distraction Tasks</h1>
+        <h1 className="text-xl font-bold text-foreground">Distraction Tasks</h1>
       </div>
-      <p className="text-sm text-gray-500">Pick a task to redirect your craving energy</p>
+      <p className="text-sm text-muted-foreground">Pick a task to redirect your craving energy</p>
 
       <div className="grid grid-cols-2 gap-3">
         {TASKS.map((task) => (
@@ -56,12 +56,12 @@ export default function DistractionPage() {
             aria-pressed={selected === task.label}
             className={`p-4 rounded-xl border text-left transition-all ${
               selected === task.label
-                ? 'bg-green-50 border-green-400 shadow-sm'
-                : 'bg-white border-gray-200 hover:border-green-300'
+                ? '[background:var(--gradient-success)] border-brand-green shadow-sm'
+                : 'bg-card border-border hover:border-brand-green/50'
             }`}
           >
             <span className="text-2xl">{task.emoji}</span>
-            <p className="text-sm font-medium text-gray-700 mt-1">{task.label}</p>
+            <p className="text-sm font-medium text-foreground mt-1">{task.label}</p>
           </button>
         ))}
       </div>
@@ -71,7 +71,7 @@ export default function DistractionPage() {
           <Button
             onClick={handleComplete}
             disabled={saving}
-            className="w-full bg-green-600 hover:bg-green-700"
+            className="w-full"
           >
             {saving ? 'Saving...' : `Done: "${selected}" → Claim +3 Points`}
           </Button>

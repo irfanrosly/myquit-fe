@@ -69,40 +69,48 @@ export default async function ProgressPage() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-bold text-gray-800">Progress</h1>
+      <div className="relative rounded-2xl px-5 py-5 overflow-hidden glass-card-success">
+        <div className="absolute inset-0 [background:var(--gradient-hero)] pointer-events-none" />
+        <div className="relative z-10">
+          <p className="text-muted-foreground text-sm font-medium">Current Streak</p>
+          <span className="font-serif-display text-5xl font-normal text-brand-green leading-none glow-green">{streak}</span>
+          <p className="text-muted-foreground text-sm mt-1">days smoke-free</p>
+        </div>
+      </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <StatCard label="Current Streak" value={String(streak)} subtitle="days" />
-        <StatCard label="Total Smoke-Free" value={String(progress.totalSmokeFreeDays)} subtitle="days" />
+        <StatCard label="Current Streak" value={String(streak)} subtitle="days" variant="success" />
+        <StatCard label="Total Smoke-Free" value={String(progress.totalSmokeFreeDays)} subtitle="days" variant="success" />
         <StatCard
           label="Money Saved"
           value={progress.moneySavedActual !== null ? formatRM(progress.moneySavedActual) : '—'}
+          variant="energy"
         />
-        <StatCard label="Cigarettes Avoided" value={String(cigarettesAvoided)} />
-        <StatCard label="Cravings Managed" value={String(stats.cravingsManaged ?? 0)} />
-        <StatCard label="Total Points" value={String(stats.totalPoints)} />
+        <StatCard label="Cigarettes Avoided" value={String(cigarettesAvoided)} variant="energy" />
+        <StatCard label="Cravings Managed" value={String(stats.cravingsManaged ?? 0)} variant="neutral" />
+        <StatCard label="Total Points" value={String(stats.totalPoints)} variant="energy" />
       </div>
 
-      <Card>
+      <Card className="glass-card-success">
         <CardHeader><CardTitle className="text-base">Next Milestone</CardTitle></CardHeader>
         <CardContent>
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <div className="flex justify-between text-sm text-muted-foreground mb-2">
             <span>{prevMilestone} days</span>
             <span>{nextMilestone} days</span>
           </div>
           <Progress value={milestoneProgress} className="h-3" />
-          <p className="text-sm text-gray-600 mt-2 text-center">
+          <p className="text-sm text-brand-green font-semibold mt-2 text-center">
             {Math.max(0, nextMilestone - streak)} days to go!
           </p>
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="glass-card-energy">
         <CardHeader><CardTitle className="text-base">Savings Projection</CardTitle></CardHeader>
         <CardContent className="space-y-2 text-sm">
-          <div className="flex justify-between"><span className="text-gray-500">This month (30 days)</span><span className="font-semibold text-green-600">{formatRM(monthlySavings)}</span></div>
-          <div className="flex justify-between"><span className="text-gray-500">This year (365 days)</span><span className="font-semibold text-green-600">{formatRM(annualSavings)}</span></div>
-          <div className="flex justify-between"><span className="text-gray-500">Daily saving</span><span className="font-semibold text-green-600">{formatRM(dailyCost)}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">This month (30 days)</span><span className="font-semibold text-brand-amber">{formatRM(monthlySavings)}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">This year (365 days)</span><span className="font-semibold text-brand-amber">{formatRM(annualSavings)}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">Daily saving</span><span className="font-semibold text-brand-amber">{formatRM(dailyCost)}</span></div>
         </CardContent>
       </Card>
 

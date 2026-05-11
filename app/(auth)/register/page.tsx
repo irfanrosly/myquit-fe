@@ -33,11 +33,12 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'radial-gradient(ellipse 80% 60% at 30% 20%, oklch(0.22 0.12 155 / 0.5), transparent 60%), oklch(0.10 0.008 200)' }}>
+      <Card className="w-full max-w-sm overflow-hidden glass-card border-0">
+        <div className="h-1.5 bg-brand-green" />
         <CardHeader>
-          <CardTitle className="text-2xl text-center text-green-600">MYQuitMate</CardTitle>
-          <p className="text-center text-gray-500 text-sm">Create your account</p>
+          <CardTitle className="font-serif-display text-3xl font-normal text-center text-brand-green">MYQuitMate</CardTitle>
+          <p className="text-center text-muted-foreground text-sm">Create your account</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -53,13 +54,13 @@ export default function RegisterPage() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
             </div>
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Creating account...' : 'Create Account'}
             </Button>
           </form>
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-muted-foreground mt-4">
             Have an account?{' '}
-            <Link href="/login" className="text-green-600 hover:underline">Sign in</Link>
+            <Link href="/login" className="text-brand-green hover:underline underline-offset-4">Sign in</Link>
           </p>
         </CardContent>
       </Card>

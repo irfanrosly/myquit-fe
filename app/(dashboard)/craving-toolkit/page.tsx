@@ -10,19 +10,22 @@ const TOOLS = [
 export default function CravingToolkitPage() {
   return (
     <div className="space-y-5">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-800">Craving Toolkit</h1>
-        <p className="text-sm text-gray-500 mt-1">Choose a tool to manage your craving</p>
+      <div className="relative rounded-2xl px-5 py-5 overflow-hidden glass-card">
+        <div className="absolute inset-0 [background:var(--gradient-hero)] pointer-events-none" />
+        <div className="relative z-10">
+          <h1 className="text-2xl font-semibold text-foreground">Craving Toolkit</h1>
+          <p className="text-muted-foreground text-sm mt-1">Choose a tool to manage your craving</p>
+        </div>
       </div>
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         {TOOLS.map((tool) => (
-          <Link key={tool.href} href={tool.href}>
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
+          <Link key={tool.href} href={tool.href} className="block">
+            <Card className="glass-card-energy hover:shadow-lg hover:shadow-brand-amber/20 transition-shadow cursor-pointer">
               <CardContent className="flex items-center gap-4 py-5">
                 <span className="text-3xl">{tool.emoji}</span>
                 <div>
-                  <p className="font-semibold text-gray-800">{tool.title}</p>
-                  <p className="text-sm text-gray-500">{tool.desc}</p>
+                  <p className="font-semibold text-foreground">{tool.title}</p>
+                  <p className="text-sm text-muted-foreground">{tool.desc}</p>
                 </div>
               </CardContent>
             </Card>

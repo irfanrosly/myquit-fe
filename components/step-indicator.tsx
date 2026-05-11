@@ -13,18 +13,18 @@ export function StepIndicator({ current, total, labels }: StepIndicatorProps) {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
                 i < current
-                  ? 'bg-green-600 text-white'
+                  ? 'bg-brand-green text-primary-foreground'
                   : i === current
-                  ? 'bg-green-100 text-green-700 border-2 border-green-600'
-                  : 'bg-gray-100 text-gray-400'
+                  ? 'bg-brand-green-muted text-brand-green border-2 border-brand-green'
+                  : 'bg-muted text-muted-foreground'
               }`}
             >
               {i < current ? '✓' : i + 1}
             </div>
-            <span className="text-xs mt-1 text-gray-500 hidden sm:block">{labels[i]}</span>
+            <span className="text-xs mt-1 text-muted-foreground hidden sm:block">{labels[i]}</span>
           </div>
           {i < total - 1 && (
-            <div className={`h-0.5 flex-1 mx-1 ${i < current ? 'bg-green-600' : 'bg-gray-200'}`} />
+            <div className={`h-0.5 flex-1 mx-1 ${i < current ? 'bg-brand-green' : 'bg-border'}`} />
           )}
         </div>
       ))}

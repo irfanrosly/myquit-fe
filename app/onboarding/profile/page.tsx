@@ -29,10 +29,10 @@ export default function ProfilePage() {
   return (
     <>
       <StepIndicator current={0} total={4} labels={STEPS} />
-      <Card>
+      <Card className="[background:var(--gradient-neutral)]">
         <CardHeader>
           <CardTitle>About You</CardTitle>
-          <p className="text-sm text-gray-500">Help us personalise your quit journey</p>
+          <p className="text-sm text-muted-foreground">Help us personalise your quit journey</p>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
@@ -65,7 +65,7 @@ export default function ProfilePage() {
             <Label>Occupation</Label>
             <Input value={profile.occupation} onChange={(e) => setProfile({ occupation: e.target.value })} placeholder="Optional" />
           </div>
-          <Button onClick={() => { if (!profile.name.trim()) return; router.push('/onboarding/habits'); }} className="w-full bg-green-600 hover:bg-green-700" disabled={!profile.name.trim()}>
+          <Button onClick={() => { if (!profile.name.trim()) return; router.push('/onboarding/habits'); }} className="w-full" disabled={!profile.name.trim()}>
             Next →
           </Button>
         </CardContent>

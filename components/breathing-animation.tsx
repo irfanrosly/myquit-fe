@@ -10,10 +10,10 @@ interface BreathingAnimationProps {
 }
 
 const PHASE_CONFIG: Record<Phase, { label: string; color: string; scale: number }> = {
-  inhale: { label: 'Inhale', color: '#2FBF71', scale: 1.4 },
+  inhale: { label: 'Inhale', color: '#3a6b4a', scale: 1.4 },
   hold: { label: 'Hold', color: '#0EA5E9', scale: 1.4 },
   exhale: { label: 'Exhale', color: '#8B5CF6', scale: 1 },
-  ready: { label: 'Get Ready', color: '#6B7280', scale: 1 },
+  ready: { label: 'Get Ready', color: '#8a8070', scale: 1 },
 };
 
 export function BreathingAnimation({ phase, cycleNumber, totalCycles }: BreathingAnimationProps) {
@@ -21,7 +21,7 @@ export function BreathingAnimation({ phase, cycleNumber, totalCycles }: Breathin
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 py-8">
-      <p className="text-sm text-gray-500">Cycle {cycleNumber} of {totalCycles}</p>
+      <p className="text-sm text-muted-foreground">Cycle {cycleNumber} of {totalCycles}</p>
 
       <div className="relative flex items-center justify-center">
         <motion.div
@@ -40,8 +40,8 @@ export function BreathingAnimation({ phase, cycleNumber, totalCycles }: Breathin
       </div>
 
       <div className="text-center">
-        <p className="text-4xl font-bold" style={{ color: config.color }}>{config.label}</p>
-        <p className="text-gray-400 text-sm mt-1">
+        <p className="text-4xl font-serif-display font-normal" style={{ color: config.color }}>{config.label}</p>
+        <p className="text-muted-foreground text-sm mt-1">
           {phase === 'inhale' ? '4 seconds' : phase === 'hold' ? '7 seconds' : phase === 'exhale' ? '8 seconds' : ''}
         </p>
       </div>

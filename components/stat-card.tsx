@@ -1,20 +1,27 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
+const GLASS: Record<string, string> = {
+  success: 'glass-card-success',
+  energy: 'glass-card-energy',
+  neutral: 'glass-card',
+};
+
 interface StatCardProps {
   label: string;
   value: string;
   subtitle?: string;
+  variant?: 'success' | 'energy' | 'neutral';
   className?: string;
 }
 
-export function StatCard({ label, value, subtitle, className }: StatCardProps) {
+export function StatCard({ label, value, subtitle, variant = 'neutral', className }: StatCardProps) {
   return (
-    <Card className={cn('', className)}>
-      <CardContent className="pt-5 pb-4">
-        <p className="text-sm text-gray-500">{label}</p>
-        <p className="text-3xl font-bold text-green-600 mt-1">{value}</p>
-        {subtitle && <p className="text-xs text-gray-400 mt-1">{subtitle}</p>}
+    <Card className={cn(GLASS[variant], className)}>
+      <CardContent className="pt-6 pb-5">
+        <p className="text-sm text-muted-foreground">{label}</p>
+        <p className="text-4xl font-serif-display font-normal text-brand-green mt-1">{value}</p>
+        {subtitle && <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>}
       </CardContent>
     </Card>
   );

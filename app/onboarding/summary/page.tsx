@@ -67,31 +67,31 @@ export default function SummaryPage() {
   return (
     <>
       <StepIndicator current={3} total={4} labels={STEPS} />
-      <Card>
+      <Card className="[background:var(--gradient-neutral)]">
         <CardHeader>
           <CardTitle>Review Your Plan</CardTitle>
-          <p className="text-sm text-gray-500">Check your details before starting</p>
+          <p className="text-sm text-muted-foreground">Check your details before starting</p>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
-            <div className="flex justify-between"><span className="text-gray-500">Name</span><span className="font-medium">{profile.name}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Quit date</span><span className="font-medium">{plan.quitDate}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Cigarettes/day</span><span className="font-medium">{habits.cigarettesPd || '—'}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Daily cost</span><span className="font-medium text-red-600">{dailyCost ? formatRM(dailyCost) : '—'}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Readiness</span><span className="font-medium">{plan.readiness}/10</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Confidence</span><span className="font-medium">{plan.confidence}/10</span></div>
+          <div className="[background:var(--gradient-success)] rounded-lg p-4 space-y-2 text-sm">
+            <div className="flex justify-between"><span className="text-muted-foreground">Name</span><span className="font-medium">{profile.name}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Quit date</span><span className="font-medium">{plan.quitDate}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Cigarettes/day</span><span className="font-medium">{habits.cigarettesPd || '—'}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Daily cost</span><span className="font-medium text-slip-day">{dailyCost ? formatRM(dailyCost) : '—'}</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Readiness</span><span className="font-medium">{plan.readiness}/10</span></div>
+            <div className="flex justify-between"><span className="text-muted-foreground">Confidence</span><span className="font-medium">{plan.confidence}/10</span></div>
           </div>
           {plan.motivations.length > 0 && (
             <div>
-              <p className="text-sm text-gray-500 mb-1">Motivations</p>
+              <p className="text-sm text-muted-foreground mb-1">Motivations</p>
               <div className="flex flex-wrap gap-1">
-                {plan.motivations.map((m) => <span key={m} className="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs">{m}</span>)}
+                {plan.motivations.map((m) => <span key={m} className="px-2 py-0.5 bg-brand-green-muted text-brand-green rounded-full text-xs">{m}</span>)}
               </div>
             </div>
           )}
           <div className="flex gap-3 pt-2">
             <Button variant="outline" onClick={() => router.back()} className="flex-1">← Back</Button>
-            <Button onClick={handleSubmit} className="flex-1 bg-green-600 hover:bg-green-700" disabled={loading}>
+            <Button onClick={handleSubmit} className="flex-1" disabled={loading}>
               {loading ? 'Saving...' : 'Start My Journey 🚀'}
             </Button>
           </div>

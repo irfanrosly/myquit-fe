@@ -27,10 +27,10 @@ export function MultiSelectChips({ options, selected, onChange, className }: Mul
             type="button"
             onClick={() => toggle(opt.value)}
             className={cn(
-              'px-3 py-1.5 rounded-full text-sm border transition-colors',
+              'px-3 py-1.5 rounded-full text-sm border transition-all duration-150',
               isSelected
-                ? 'bg-green-600 text-white border-green-600'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-green-400',
+                ? 'bg-brand-green text-primary-foreground border-brand-green font-medium'
+                : 'bg-background text-foreground border-border hover:border-brand-green',
             )}
           >
             {opt.label}

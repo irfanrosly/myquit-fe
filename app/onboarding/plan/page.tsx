@@ -47,10 +47,10 @@ export default function PlanPage() {
   return (
     <>
       <StepIndicator current={2} total={4} labels={STEPS} />
-      <Card>
+      <Card className="[background:var(--gradient-neutral)]">
         <CardHeader>
           <CardTitle>Your Quit Plan</CardTitle>
-          <p className="text-sm text-gray-500">Plan your journey to freedom</p>
+          <p className="text-sm text-muted-foreground">Plan your journey to freedom</p>
         </CardHeader>
         <CardContent className="space-y-5">
           <div>
@@ -79,7 +79,7 @@ export default function PlanPage() {
           </div>
           <div className="flex gap-3">
             <Button variant="outline" onClick={() => router.back()} className="flex-1">← Back</Button>
-            <Button onClick={() => router.push('/onboarding/summary')} className="flex-1 bg-green-600 hover:bg-green-700" disabled={!plan.quitDate}>
+            <Button onClick={() => router.push('/onboarding/summary')} className="flex-1" disabled={!plan.quitDate}>
               Next →
             </Button>
           </div>

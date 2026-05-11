@@ -16,11 +16,16 @@ const BADGE_EMOJI: Record<string, string> = {
 
 export function BadgeCard({ badge, earned }: BadgeCardProps) {
   return (
-    <div className={cn('flex flex-col items-center p-4 rounded-xl border text-center transition-all', earned ? 'bg-green-50 border-green-200 shadow-sm' : 'bg-gray-50 border-gray-100 opacity-50 grayscale')}>
-      <span className="text-3xl mb-2">{BADGE_EMOJI[badge.key] ?? '🏅'}</span>
-      <p className="text-xs font-medium text-gray-700 leading-tight">{badge.label}</p>
+    <div className={cn(
+      'flex flex-col items-center p-4 rounded-xl text-center transition-all duration-200',
+      earned
+        ? 'glass-card-success ring-1 ring-brand-green/30'
+        : 'glass-card opacity-40 grayscale saturate-50',
+    )}>
+      <span className="text-4xl mb-2">{BADGE_EMOJI[badge.key] ?? '🏅'}</span>
+      <p className="text-xs font-medium text-foreground leading-tight">{badge.label}</p>
       {earned && badge.earnedAt && (
-        <p className="text-xs text-green-600 mt-1">{new Date(badge.earnedAt).toLocaleDateString()}</p>
+        <p className="text-xs text-brand-green mt-1">{new Date(badge.earnedAt).toLocaleDateString()}</p>
       )}
     </div>
   );

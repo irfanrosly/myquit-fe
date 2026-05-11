@@ -18,12 +18,18 @@ export default async function BadgesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-800">Badges</h1>
+      <div className="relative rounded-2xl px-5 py-5 overflow-hidden glass-card-success">
+        <div className="absolute inset-0 [background:var(--gradient-hero)] pointer-events-none" />
+        <div className="relative z-10">
+          <p className="font-serif-display text-3xl font-normal text-brand-green">Badges</p>
+          <p className="text-muted-foreground text-sm mt-1">{earned.length} earned · {locked.length} to unlock</p>
+        </div>
+      </div>
 
       <div>
-        <h2 className="font-semibold text-gray-700 mb-3">Earned ({earned.length})</h2>
+        <h2 className="font-semibold text-foreground mb-3">Earned ({earned.length})</h2>
         {earned.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-4">No badges yet — keep going! 💪</p>
+          <p className="text-sm text-muted-foreground text-center py-4">No badges yet — keep going! 💪</p>
         ) : (
           <div className="grid grid-cols-3 gap-3">
             {earned.map((b) => <BadgeCard key={b.key} badge={b} earned />)}
@@ -32,7 +38,7 @@ export default async function BadgesPage() {
       </div>
 
       <div>
-        <h2 className="font-semibold text-gray-700 mb-3">Locked ({locked.length})</h2>
+        <h2 className="font-semibold text-foreground mb-3">Locked ({locked.length})</h2>
         <div className="grid grid-cols-3 gap-3">
           {locked.map((b) => <BadgeCard key={b.key} badge={b} earned={false} />)}
         </div>

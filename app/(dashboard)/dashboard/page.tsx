@@ -54,23 +54,33 @@ export default async function DashboardPage() {
     { href: '/craving-toolkit/mood', label: '📝 Log Mood', desc: '+2 pts' },
   ];
 
+  const lastSlipText = relativeDays(progress?.lastSlipAt ?? null);
+
   return (
     <div className="space-y-5">
-      <div>
-        <p className="text-gray-500 text-sm">Welcome back,</p>
-        <h1 className="text-2xl font-bold text-gray-800">{user?.name} 👋</h1>
+      <div className="relative rounded-2xl px-6 py-6 overflow-hidden glass-card">
+        <div className="absolute inset-0 [background:var(--gradient-hero)] pointer-events-none" />
+        <div className="relative z-10">
+          <p className="text-muted-foreground text-sm">Welcome back,</p>
+          <h1 className="font-sans text-xl font-semibold text-foreground">{user?.name}</h1>
+          <div className="mt-4 flex items-end gap-2">
+            <span className="font-serif-display text-7xl text-brand-green leading-none glow-green">
+              {progress?.currentStreak ?? 0}
+            </span>
+            <div className="mb-2">
+              <p className="text-foreground/80 text-base font-medium">day streak</p>
+              <p className="text-muted-foreground text-xs">{lastSlipText}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <StatCard
-          label="Current Streak"
-          value={String(progress?.currentStreak ?? 0)}
-          subtitle="days"
-        />
-        <StatCard
-          label="Total Smoke-Free Days"
+          label="Smoke-Free Days"
           value={String(progress?.totalSmokeFreeDays ?? 0)}
           subtitle="days"
+          variant="success"
         />
         <StatCard
           label="Money Saved"
@@ -78,27 +88,26 @@ export default async function DashboardPage() {
             ? formatRM(progress.moneySavedActual)
             : '—'}
           subtitle="actual"
+          variant="energy"
         />
         <StatCard
           label="Total Points"
           value={String(stats?.totalPoints ?? 0)}
           subtitle="keep earning!"
+          variant="energy"
+          className="col-span-2"
         />
       </div>
 
-      <p className="text-xs text-gray-500 -mt-2">
-        {relativeDays(progress?.lastSlipAt ?? null)}
-      </p>
-
       <div>
-        <h2 className="font-semibold text-gray-700 mb-3">Quick Actions</h2>
-        <div className="space-y-2">
+        <h2 className="font-semibold text-foreground mb-3">Quick Actions</h2>
+        <div className="flex flex-col gap-3">
           {quickActions.map((a) => (
-            <Link key={a.href} href={a.href}>
-              <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <Link key={a.href} href={a.href} className="block">
+              <Card className="glass-card-energy hover:shadow-lg hover:shadow-brand-amber/20 transition-shadow cursor-pointer">
                 <CardContent className="flex items-center justify-between py-4">
-                  <span className="font-medium text-gray-700">{a.label}</span>
-                  <span className="text-xs text-green-600 font-medium">{a.desc}</span>
+                  <span className="font-medium text-foreground">{a.label}</span>
+                  <span className="text-xs text-brand-amber font-semibold">{a.desc}</span>
                 </CardContent>
               </Card>
             </Link>
