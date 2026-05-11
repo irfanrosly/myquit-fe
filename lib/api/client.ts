@@ -4,7 +4,7 @@ let isRefreshing = false;
 
 async function refreshTokens(): Promise<boolean> {
   try {
-    const res = await fetch(`${API_URL}/auth/refresh`, {
+    const res = await fetch(`/api/auth/refresh`, {
       method: 'POST',
       credentials: 'include',
     });

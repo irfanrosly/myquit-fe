@@ -1,14 +1,28 @@
-import { apiPost } from './client';
 import { User } from '@/types';
+
+async function authFetch<T>(path: string, body?: unknown): Promise<T> {
+  const res = await fetch(`/api/auth${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ message: 'Request failed' }));
+    throw err;
+  }
+  const json = await res.json();
+  return json.data as T;
+}
 
 export const authApi = {
   register: (email: string, password: string, name: string) =>
-    apiPost<User>('/auth/register', { email, password, name }),
+    authFetch<User>('/register', { email, password, name }),
 
   login: (email: string, password: string) =>
-    apiPost<User>('/auth/login', { email, password }),
+    authFetch<User>('/login', { email, password }),
 
-  logout: () => apiPost<null>('/auth/logout'),
+  logout: () => authFetch<null>('/logout'),
 
-  refresh: () => apiPost<User>('/auth/refresh'),
+  refresh: () => authFetch<User>('/refresh'),
 };
