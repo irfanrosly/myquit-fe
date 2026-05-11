@@ -19,7 +19,9 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const user = await authApi.login(form.email, form.password);
-      if (!user.onboardingDone) {
+      if (user.role === 'ADMIN') {
+        router.push('/admin');
+      } else if (!user.onboardingDone) {
         router.push('/onboarding/profile');
       } else {
         router.push('/dashboard');
@@ -33,11 +35,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'radial-gradient(ellipse 80% 60% at 30% 20%, oklch(0.22 0.12 155 / 0.5), transparent 60%), oklch(0.10 0.008 200)' }}>
+      <Card className="w-full max-w-sm overflow-hidden glass-card border-0">
+        <div className="h-1.5 bg-brand-green" />
         <CardHeader>
-          <CardTitle className="text-2xl text-center text-green-600">MYQuitMate</CardTitle>
-          <p className="text-center text-gray-500 text-sm">Sign in to your account</p>
+          <CardTitle className="font-serif-display text-3xl font-normal text-center text-brand-green">MYQuitMate</CardTitle>
+          <p className="text-center text-muted-foreground text-sm">Sign in to your account</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -63,13 +66,13 @@ export default function LoginPage() {
                 autoComplete="current-password"
               />
             </div>
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-muted-foreground mt-4">
             No account?{' '}
-            <Link href="/register" className="text-green-600 hover:underline">Register</Link>
+            <Link href="/register" className="text-brand-green hover:underline underline-offset-4">Register</Link>
           </p>
         </CardContent>
       </Card>
